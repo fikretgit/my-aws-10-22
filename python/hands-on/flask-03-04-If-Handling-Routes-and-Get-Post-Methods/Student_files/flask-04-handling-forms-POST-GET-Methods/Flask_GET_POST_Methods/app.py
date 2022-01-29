@@ -1,17 +1,18 @@
 # Import Flask modules
 from flask import Flask, request, render_template
 
+
 # Create an object named app
 app = Flask(__name__)
 
-# create a function named "lcm" which calculates a least common multiple values of two numbers. 
 
+# create a function named "lcm" which calculates a least common multiple values of two numbers. 
 def lcm(num1,num2):
     common_multiplications = [] 
     for i in range(max(num1, num2),num1*num2+1): 
         if i%num1==0 and i%num2==0: 
            common_multiplications.append(i) 
-    return min(common_multiplications) 
+    return min(common_multiplications)
 
 # Create a function named `index` which uses template file named `index.html` 
 # send two numbers as template variable to the app.py and assign route of no path ('/') 
@@ -29,16 +30,11 @@ def calculate():
     if request.method == "POST":
         num1 = request.form.get("number1")
         num2 = request.form.get("number2")
-        return render_template("result.html", result1 = num1, result2 = num2, lcm = lcm(int(num1),int(num2)), developer_name = 'Felix')
+        return render_template("result.html", result1 = num1, result2 = num2, lcm = lcm(int(num1),int(num2)), developer_name = 'Serdar')
     else:
-        return render_template("result.html", developer_name = 'Felix')
+        return render_template("result.html")
 
 
 # Add a statement to run the Flask application which can be debugged.
-
 if __name__== "__main__":
     app.run(debug=True)
-   
-    
-    
-    
