@@ -56,6 +56,7 @@ fi
 chmod +x if-statement.sh
 ./if-statement.sh
 ```
+# indentation yapılsa da çalışıyor yapılmasa da..!!
 
 - We can use `Relational Operators`, `String Operators` or `File Test Operators` inside the square brackets ( [ ] ) in the if statement above. 
 
@@ -92,13 +93,15 @@ if [[ "a" = "a" ]]
 then
   echo "They are same"
 fi
+# a dan önce boşluk farz..!! yoksa çalışmıyor..!!
+# tek parantez le de çalışıyor..!! çift bazen çalışmıyormuş..!!
 
 if [[ "a" != "b" ]]
 then
   echo "They are not same"
 fi
 
-if [[ -z "" ]]
+if [[ -z "" ]]  # içine birşey yazarsak boş dönüyor..!!
 then
   echo "It is empty"
 fi
@@ -141,7 +144,7 @@ chmod 400 file
 ```
 
 Create a file and name it `file-operators.sh`
-
+/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/ec2-user/.local/bin:/home/ec2-user/bin
 ```bash
 #!/bin/bash
 
