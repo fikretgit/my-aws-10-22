@@ -20,15 +20,16 @@
 - Click the `Create Security Group`.
 
 ```text
-Security Group Name  : EC2 SecGrp
-Description          : EC2 SecGrp
+Security Group Name  : EC2SecGrp
+Description          : EC2SecGrp
 VPC                  : Default VPC
 Inbound Rules:
     - Type: SSH ----> Source: Anywhere
+    Ayrıca NFS Protokolu de eklenebilir.. 2049 Port NO ya sahip
 Outbound Rules: Keep it as default
 Tag:
     - Key   : Name
-      Value : EC2 SecGrp
+      Value : EC2SecGrp
 ```
 
 ### Step 2 - Create EFS SecGrp:
@@ -36,8 +37,8 @@ Tag:
 - Click the `Create Security Group`.
 
 ```text
-Security Group Name  : EFS SecGrp
-Description          : EFS SecGrp
+Security Group Name  : EFSSecGrp
+Description          : EFSSecGrp
 VPC                  : Default VPC
 ***Inbound Rules:
     - Type: NFS ----> Port: 2049 ------>Source: sg-EC2 SecGrp
@@ -151,6 +152,9 @@ ssh -i .....pem ec2-user@..................
 ```text
 sudo yum update -y
 ```
+```
+sudo hostnamectl set-hostname Felix  --> hostname i ayarladık..
+```
 
 - Install the "Amazon-efs-utils Package" on Amazon Linux
 
@@ -158,7 +162,7 @@ sudo yum update -y
 sudo yum install -y amazon-efs-utils
 ```
 
-- Create Mounting point 
+- Create Mounting point --> bu aslında bir EFS giriş kapısı.. başka bir şey olmaz EFS olmalı ki girebilelim..!!
 
 ```text
 sudo mkdir efs
@@ -275,8 +279,8 @@ Instance Type   : t2.micro
 Network         : default
 **File systems  :Add file system-------> FirstEFS (Note down the mnt point "/mnt/efs/fs1")
 Subnet          : default
-Security Group  : EC2 SecGrp
-    Sec.Group Name : EC2 SecGrp
+Security Group  : EC2SecGrp
+    Sec.Group Name : EC2SecGrp
 Tag             :
     Key         : Name
     Value       : EC2-3
@@ -287,8 +291,8 @@ Tag             :
 ssh -i .....pem ec2-user@..................
 ```
 - Go to the directory of mount target 
-```text
-cd /mnt/efs/fs1/
+```text efs1 dosyasını sildik console da.. gerek yok dedi Osvaldo hocamız..
+cd /mnt/efs
 ```
 - Show the example.txt:
 
