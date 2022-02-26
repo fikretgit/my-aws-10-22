@@ -8,6 +8,7 @@ Parameters:
     Default: serdar
     ConstraintDescription : Must be the name of an existing EC2 KeyPair.
 Resources:
+
   WebServerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -21,6 +22,7 @@ Resources:
           FromPort: 22
           ToPort: 22
           CidrIp: 0.0.0.0/0
+          
   WebServerHost:
     Type: AWS::EC2::Instance
     Properties:

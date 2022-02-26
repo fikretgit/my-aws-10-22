@@ -39,7 +39,7 @@ MySQL
 - Version
 
 ```text
-8.0.25
+8.0.28 yaptık en son versiyon (26.02.2022)
 ```
 
 - Template
@@ -65,9 +65,10 @@ Burstable classes (includes t classes) : db.t2.micro
 - Storage
 
 ```text
-Storage type          : ssd
+Storage type          : ssd general purpose
 Storage size          : default 20GiB
-Storage autoscaling   : unchecked
+Storage autoscaling   : !!unchecked!!
+!!! storage ihtiyacı oluşursa kapasite artırımı için check yapılabilir..!!!
 ```
 
 - Connectivity
@@ -78,10 +79,11 @@ VPC                           : default
 Click Additional Connectivity Configuration;
 
 Subnet group                  : default
-*Publicly accessible          : ***Yes
-Existing VPC security groups  : Default
+*Publicly accessible          : ***Yes (eğer MySQL-Client oluştursaydık, No diyecektik..)
+Existing VPC security groups  : Default (derste yeni oluştur dedik, adı ; DB-Sec-Group yaptık)
 Availability Zone             : No preference
-Database port                 : 3306
+Additional Confifugation altında 
+Database port                 : 3306 (default)
 ```
 
 - Database authentication
@@ -90,13 +92,16 @@ Database port                 : 3306
 DB Authentication: Password authentication
 ```
 
-- Additional configuration
+- Additional configuration - tıkla
 
 ```text
 Initial DB name                   : clarusway
 DB parameter group & option group : default
 Automatic backups                 : enable
 Backup retention period           : 7 days (Explain how)
+
+Select Window - 02.00 UTC Duration : 05 hrs yaptık..
+alttaki Copy tags to Snapshots ı uncheck yaptı hoca..
 
 Select window for backup to show snapshots
 Monitoring  : Unchecked
@@ -105,6 +110,7 @@ Log exports : Unchecked
 Maintenance
   - Enable auto minor version upgrade: Enabled (Explain what minor and major upgrade are)
   - Maintenance window (be careful not to overlap maintenance and backup windows)
+  Bunun Select Window unu da 03.00 yaptık.. 02 olmuyor zaten..!!
 
 Deletion protection: *Enabled
 ```
@@ -131,7 +137,7 @@ Show that when you select `production` instead of `Free Tier Template` it charge
 On the page opened, we'll set up a new connection:
 
 ```text
-1. Connection Name   : first connection.
+1. Connection Name   : first-connection.
 
 2. Host Name         : Paste the endpoint of the database that you have copied 
                        and leave the port as is, 3306
@@ -229,6 +235,6 @@ SELECT * FROM clarusway.Personal_Info_1;
        
               "I acknowledge...." flag is "Checked"
 
- - Type "delete me" nad Click "Delete".
+ - Type "delete me" and Click "Delete".
 
  - Show that Automated Backups are deleted also.
