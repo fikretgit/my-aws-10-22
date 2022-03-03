@@ -36,7 +36,7 @@ At the end of the this hands-on training, students will be able to;
 
 ```text
 Name: DatabaseSecGrb
-Inbound: Mysql/Aurora ------>3306------> Anywhere
+Inbound: Mysql/Aurora ------>3306------> Anywhere olabilir ancak EC2 içi açılan bir Sec Group da burada büyüteçli yere atanabilr.. yani customize edilebilir.. ssh ile bağlandığımız makine ilave bir güvenlik katmanı konarak RDS e sadece o EC2 ile bağlanma sağlanabilir.. (charlie hoca dan)
 ```
 
 - Go to the Amazon RDS Service and select Database section from the left-hand menu, click databases and then click Creating Database.
@@ -68,7 +68,7 @@ Free tier
 - Settings
 
 ```text
-DB instance identifier: RDS-mysql
+DB instance identifier: RDS-MySQL
 Master username: admin
 Master password: Pl123456789
 ```
@@ -98,7 +98,7 @@ We can not select any option for free tier
 ```text
 VPC                           : default
 
-Click Additional Connectivity Configuration;
+Additional Connectivity Configuration;
 
 Subnet group                  : default
 Publicly accessible           : No
@@ -152,6 +152,7 @@ Security Group
 sudo apt update -y
 
 ```
+
 
 - Install the `mariadb-client`.
 
@@ -360,6 +361,10 @@ USE clarusway;
   - Settings:
     DB Instance identifier : restored-from-man-snapshot
 
+  - Availability & durability:
+    Do not create standby Instance
+    Availability Zone: No preference    
+
   - Connectivity:
     Virtual private cloud (VPC)Info: Default
 
@@ -375,10 +380,6 @@ USE clarusway;
   - Storage:
     General Purpose SSD
     Allocated storage : 20 GiB
-
-  - Availability & durability:
-    Do not create standby Instance
-    Availability Zone: No preference
 
   - Database authentication:
     Password authentication
@@ -460,26 +461,31 @@ there are only 4 records
     MySQL Community Edition
   - License model
     general public-licence
-  - DB instance class
-    t2.micro
-  - Multi-AZ deployment
-    No
-  - Storage type
-    General Purpose SSD
-
-  Settings:
   - DB instance identifier
     restored-from-point-in-time-RDS
-  - Parameter group
-    default.mysql8.0
-
+  - DB instance class
+    t2.micro
+  - Availability & durability
+    unchecked - Multi-AZ deployment
+    Check "Don't create a standby instance"
+  - Storage type
+    General Purpose SSD
+  - Storage autoscaling
+    ??? unchecked "Enable storage autoscaling"
+  
   Network & Security:
-  Virtual Private Cloud (VPC)
+  - Virtual Private Cloud (VPC)
     Default
   - Subnet group
     default
   - Public accessibility
-    *Yes
+    "Yes"
+  - Existing VPC Security Group - as we created DatabaseSecGroup
+  - Database Authentication
+    Password authentication
+  - Database configuration
+    default.mysql8.0
+
   - Availability zone, Security groups, Database options, Backup, Log exports, Maintenance
     Keep it as is
   ```
@@ -489,7 +495,7 @@ there are only 4 records
 - Log into the RDS instance (`restored-from-point-in-time-RDS`) as `admin` using the password defined `Pl123456789`
 
 ```bash
-mysql -h [DNS Name of point in time recovery RDS Instance] -u admin -p clarusway
+mysql -h [End Point of point in time recovery RDS Instance] -u admin -p clarusway
 ```
 
 - Show that deleted records of employees are back in `restored-from-point-in-time-RDS`.
@@ -508,7 +514,7 @@ SELECT * FROM employees ORDER BY salary ASC;
 
 ```bash
 mysqldump -h [restored-from-point-in-time-RDS endpoint] -u admin -p clarusway > backup.sql
-```
+``` it takes so many times..```
 
 - Show `backup.sql` file with `ls` command.
 
