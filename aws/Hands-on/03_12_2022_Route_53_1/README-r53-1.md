@@ -34,7 +34,7 @@ At the end of the this hands-on training, students will be able to;
 Region: "N.Virginia"
 VPC: Default VPC
 Subnet: PublicA
-Sec Group: "Route 53 Sec"
+Sec Group: "Route 53 Sec-Group"
 
 user data: 
 
@@ -75,11 +75,12 @@ systemctl enable httpd
 
 ### STEP 3: Create Static WebSite Hosting :
 
- 1. Create Static WebSite Hosting-1/ "www.[your domain name].net"
+ 1. Create Static WebSite Hosting-1/ "www.[your domain name].com"
  
-  - Go to S3 service and create a bucket with sub-domain name: "www.[your sub-domain name].net"
+  - Go to S3 service and create a bucket with sub-domain name: "www.[your sub-domain name].com"
   - Public Access "Enabled"
   - Upload Files named "index.html" and "sorry.jpg" in "s3.bucket.www" folder
+  Properties >> Static WebSite Hosting >> Enabled >> İndex Document'e index.html yazıyoruz >> save changes..
   - Permissions>>> Bucket Policy >>> Paste bucket Policy
 ```bash
 {
@@ -280,9 +281,9 @@ Explain that Public hosted Zone and permanent records SOA nad NS.
 ```bash
 Record Name:"www"
 Value/Route traffic to: 
-  - select "IP address or another value depending the record type" option 
+  - select "IP address or another value depending the record type" option (bu eski konsol özelliği büyük ihtimallle)
       - enter IP of the "N.Virginia_1" EC2
-Record Type : A
+Record Type : A -Routes traffic to an IPv4 address and some AWS resources
 Type: "A – IPv4 address"
 Alias:"No"
 TTL:"1m"
@@ -315,12 +316,12 @@ TTL:"1m"
 - Select newly created record's flag and hit the "create record" 
 tab seen bottom
 
-- After show "info.[your DNS name].net" on the browser, "Delete" this record 
+- After show "info.[your DNS name].com" on the browser, "Delete" this record 
 
 
 ### STEP 3: Add another IP (N. Virginia_2)  to the existing "A record" 
 
-- select "www.[your DNS name].net" A-record ---> Edit
+- select "www.[your DNS name].com" A-record ---> Edit
 ```bash
 Name:"www"
 Value/Route traffic to:
@@ -329,7 +330,8 @@ Value/Route traffic to:
 ```
 
 - Check from local terminal
-nslookup www.[your DNS name].net an show two IP address 
+nslookup www.[your DNS name].com an show two IP address 
+2 adres gözükmeli..
 
 
 ## Part 4 - Creating a CNAME Record:
@@ -348,7 +350,7 @@ nslookup www.[your DNS name].net an show two IP address
 Record Name:"showcname"
 Value/Route traffic to: 
   - "IP address or another value depending on the record type"
-    - enter "www.[your DNS name].net"
+    - enter "www.[your DNS name].com"
 Record Type : "CNAME"-Routes to another domain and some AWS resources
 TTL:"1m"
 ```
@@ -357,7 +359,7 @@ TTL:"1m"
 - Select newly created record's flag and hit the "create record" 
 tab seen bottom
 
-- After show "showcname.[your DNS name].net" on the browser. It will reflects the "www.[your DNS name].net". After that "Delete"  this record 
+- After show "showcname.[your DNS name].com" on the browser. It will reflects the "www.[your DNS name].com". After that "Delete"  this record 
 
 ## Part 5 - Creating a Alias Record:
 
@@ -376,7 +378,7 @@ Record Name:"www"
 Value/Route traffic to: 
     - Alias to *****S3 Website Endpoint*******
     - US East (N.Virginia) [us-east-1]
-    - choose your S3 bucket named "www.[your DNS name].net"
+    - choose your S3 bucket named "www.[your DNS name].com"
 Record Type : A
 ```
 - hit the define simple record
@@ -385,9 +387,9 @@ Record Type : A
 tab seen bottom
 
 
-- go to the target domain name "www.[your DNS name].net" on browser
+- go to the target domain name "www.[your DNS name].com" on browser
 
-- show the content of web page. It is the same as  S3 static web hosting page.
+- show the content of web page. It is the same as S3 static web hosting page.
 
 - ***Delete the Alias record 
 
@@ -406,7 +408,7 @@ Record Name:"www"
 Value/Route traffic to: 
     - Alias to ***** ELB Endpoint*******
     - US East (N.Virginia) [us-east-1]
-    - choose your S3 bucket named "www.[your DNS name].net"
+    - choose your S3 bucket named "www.[your DNS name].com"
 Record Type : A
 ```
 - hit the define simple record
@@ -415,7 +417,7 @@ Record Type : A
 tab seen bottom
 
 
-- go to the target domain name "www.[your DNS name].net" on browser
+- go to the target domain name "www.[your DNS name].com" on browser
 
 - show the content of web page. It is the same as S3 static web hosting page.
 
