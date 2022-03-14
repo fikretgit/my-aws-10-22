@@ -29,7 +29,7 @@ At the end of the this hands-on training, students will be able to;
 
 ### STEP 1: Create Sec.Group:
 ```bash
-   Route 53 Sec: In bound : "SSH 22, HTTP 80  > anywhere(0:/00000)"
+   Route 53 Sec-Group: In bound : "SSH 22, HTTP 80  > anywhere(0:/00000)" VPC:belirtilmemiş Default yapalım..
 ```
 ### STEP 2: Create Instances:
 
@@ -39,7 +39,7 @@ At the end of the this hands-on training, students will be able to;
 ```bash
 Region: "N.Virginia"
 VPC: Default VPC
-Subnet: PublicA
+Subnet: PublicA (No preference) seçeneği
 Sec Group: "Route 53 Sec"
 
 user data: 
@@ -63,8 +63,8 @@ Region: "N.Virginia"
 VPC: Default VPC
 Subnet: PublicA
 Sec Group: "Route 53 Sec"
-
-   user data:
+````
+user data:
 
 #!/bin/bash
 
@@ -123,7 +123,7 @@ wget https://raw.githubusercontent.com/awsdevopsteam/route-53/master/local/Local
 service httpd start
 
 ```
-4. Create "Windows" instance in VPC of  "clarus-vpc-a" named "Windows"
+5. Create "Windows" instance in VPC of  "clarus-vpc-a" named "Windows"
 
 ```bash 
 Region: "N.Virginia"
@@ -135,9 +135,9 @@ Sec Group: RDP---->0.0.0.0/0
 
 ### STEP 3: Create a Static WebSite Hosting :(or use existing one from former session)
 
- 1. Create Static WebSite Hosting-1/ "www.[your sub-domain name].net"
+ 1. Create Static WebSite Hosting-1/ "www.[your sub-domain name].com"
  
-  - Go to S3 service and create a bucket with sub-domain name: "www.[your sub-domain name].net"
+  - Go to S3 service and create a bucket with sub-domain name: "www.[your sub-domain name].com"
   - Public Access "Enabled"
   - Upload Files named "index.html" and "sorry.jpg" in "s3.bucket.www" folder
   - Permissions>>> Bucket Policy >>> Paste bucket Policy
@@ -216,7 +216,7 @@ click create and show that the status is unhealthy approximately after 90 second
 
 - Got to the hosted zone and select the public hosted zone of our domain name
 
-- Clear all teh record sets except NS and SOA
+- Clear all the other record sets except NS and SOA
 
 - Click create record
 
@@ -229,7 +229,7 @@ Record Name :"www"
 Record Type : A
 TTL:"60"
 Value/Route traffic to : 
-  - "Ip address or another value depending on the record type"
+  - ??"Ip address or another value depending on the record type"??
     - enter IP IP address of N.Virginia_1 
 Routing: "Failover"
 Failover record type    : Primary
@@ -255,7 +255,7 @@ TTL:"60"
 Value/Route traffic to : 
   - "Alias to S3 website endpoint"
   - N.Virginia(us-east-1)
-  - Choose your S3 bucket named "www.[your sub-domain name].net"
+  - Choose your S3 bucket named "www.[your sub-domain name].com"
 Routing: "Failover" 
 Failover record type    : Secondary
 Health check            : keep it as is
@@ -290,7 +290,7 @@ Record Name :"geo"
 Record Type : A
 TTL:"60"
 Value/Route traffic to : 
-  - "Ip address or another value depending on the record type"
+  - ??"Ip address or another value depending on the record type"??
     - "IP of Geo-Japon Instance"
 Routing: "Geolocation" 
 Location               :
@@ -316,7 +316,7 @@ Record Name :"geo"
 Record Type : A
 TTL:"60"
 Value/Route traffic to : 
-  - "Ip address or another value depending on the record type"
+  - ??"Ip address or another value depending on the record type"??
     - "IP of Geo-Frankfurt Instance"
 Routing: "Geolocation "
 Location               :
@@ -343,7 +343,7 @@ Record Name :"geo"
 Record Type : A
 TTL:"60"
 Value/Route traffic to : 
-  - "Ip address or another value depending on the record type"
+  - ??"Ip address or another value depending on the record type"??
     - "IP of N.Virginia"
 Routing: "Geolocation"  
 Location               : Select Default option
@@ -391,7 +391,7 @@ Record Name :"www"
 Record Type : A
 TTL:"60"
 Value/Route traffic to : 
-  - "Ip address or another value depending on the record type"
+  - ??"Ip address or another value depending on the record type"??
     - enter IP IP address of "Local" 
 Routing: "Simple"
 ```
@@ -404,7 +404,7 @@ Record Name :"www"
 Record Type : A
 TTL:"60"
 Value/Route traffic to : 
-  - "Ip address or another value depending on the record type"
+  - ??"Ip address or another value depending on the record type" ??
     - enter IP IP address of "N.Virginia" 
 Routing: "Simple"
 ```
