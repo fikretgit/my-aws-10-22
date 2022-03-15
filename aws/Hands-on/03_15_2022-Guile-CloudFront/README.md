@@ -8,7 +8,7 @@
 
 ```text
 
-      -  Domain names               : "[your donamin name].net" (naked domain name)
+      -  Domain names               : "[your donamin name].com" (naked domain name)
 
       -  Select validation method   : "DNS validation"
   
@@ -27,7 +27,7 @@
 
 ## Part 2 - Creating a Static WebSite Hosting
 
-1. Go to S3 service and create a bucket with domain name: "[your-donamin-name].net"
+1. Go to S3 service and create a bucket with domain name: "[your-donamin-name].com"
 
 - Public Access Enabled
 - Upload Files named "index.html" and "ryu.jpg" in "static-web-v1" folder
@@ -96,7 +96,7 @@ Routing policy: Simple Routing
 
 - hit "Create records" at the bottom,
 
-- go to the target domain name "[your DNS name].net" on browser,
+- go to the target domain name "[your DNS name].com" on browser,
 
 - check if it is working with "https protocol",
 
@@ -108,7 +108,7 @@ Step-1 - Invalidation
 
 - Go to your S3 bucket hosting the website and put the "ryu.jpg" file in the "image-v2" folder (not in v1) to your bucket. 
 
-- Go to the target domain name "[your DNS name].net" on browser and notice the image has't been changed.
+- Go to the target domain name "[your DNS name].com" on browser and notice the image has't been changed.
 
 - Go to CloudFront and select the newly created distribution.
 
@@ -131,3 +131,14 @@ Step-2 - Geographic Restriction
 - Go to your website and show the webpage is blocked.
 
 Disable and delete your distribution.
+
+
+Cleaning.. sertifikalar kalacak.. silmiyoruz..
+1. cloudfront ta distribution ı diseble yapıcaz, sonra da disabled olduktan sonra siliyoruz..
+
+2. Route53 kayıtları silebiliriz.. A yı sildik..
+  Cname kaydını Validation için yapmıştık.. silinebilir. zamanı geldiğinde AWS renewal yapmaz. yeni bir Cname yapmak gerekebilir.. optional
+
+3. bucket lar kalsın içi boş kalsın dedi hocamız.. Block all public i kapatabiliriz.. içine birşey koyduğumuz da tekrar açabiliriz..
+
+4. 
