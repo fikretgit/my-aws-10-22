@@ -113,7 +113,7 @@ Instances Min: 2
 
 - Deployment Preferences :
 
-    - Deployment policy   : ****Rolling with Additional Batch
+    - Deployment policy   : ****Add Additional Batch
     - Healthy threshold   : OK
     - Ignore health check : False
     - Batch size:
