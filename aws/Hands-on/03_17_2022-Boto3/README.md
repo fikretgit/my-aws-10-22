@@ -14,6 +14,8 @@
 ```text
 pip install boto3
 ```
+sıkıntı varsa 
+" pip install --upgrade pip" ile çalışır.. upgrade gerekebiliyor pip e..
 
 - If you are using Python3, try:
 
@@ -33,7 +35,7 @@ AWS Secret Access Key [****************/aND]:
 Default region name [us-east-1]: 
 Default output format [yaml]: 
 ```
-
+yukarıdaki key leri AWS CLI yüklemeden oluşan .aws dosyası içine vi config ile (region=mesela us-east-1 gibi ve output=yaml veya json) ve credentials(aws_access_key ve aws_secret_access_key) eklnince Boto3 pip install ile yüklenip kullanılabiliyor..
 
 ## Part 2 - Examples of Boto3 usage
 
@@ -141,3 +143,4 @@ Links:
 https://aws.amazon.com/sdk-for-python/
 
 https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
+
