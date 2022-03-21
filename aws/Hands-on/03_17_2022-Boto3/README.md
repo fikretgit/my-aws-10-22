@@ -144,3 +144,9 @@ https://aws.amazon.com/sdk-for-python/
 
 https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
 
+Charlie Hoca ders sonunda 
+1. Session tanımlama örneği gösterdi.. (Class_Notes da Session.py var) best execution da kodlar böyle açık açık yazılmaz. dolayısıyla dosya üzerinden çekilir bu keyler ve bir environment üzerinden çalıştırılır..
+
+2. örnek de snapshot alımı üzerine.. (Class_Notes da volume_snapshot.py var)
+
+3. örnek de Route-53 ile ilgili bir örnek verdi.. onun py dosyası da mevcut..
