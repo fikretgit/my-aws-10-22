@@ -1,0 +1,94 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  Cloudformation Template for kittens carousel static website deploy on s3 through cloudfront and route 53
+
+Parameters:
+  KittensDomainName:
+    Description: Full domain name for the App. ex. kittens.fikretopaloglu.com
+    Type: String
+
+  DomainName:
+    Description: DNS Name of existing Amazon Route 53 hosted zone. exp.fikretopaloglu.com
+    Type: String
+
+
+
+Resources:
+  KittensBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      BucketName: !Ref KittensDomainName
+      WebsiteConfiguration:
+        IndexDocument: index.html
+
+  KittensBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref KittensBucket # Required
+      PolicyDocument: 
+        Statement:
+        - Sid: PublicReadGetObject
+          Action: s3:GetObject
+          Effect: Allow
+          Resource: !Join ['', ['arn:aws:s3:::', !Ref 'KittensBucket', /*]]
+          Principal: '*'
+
+  KittensCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      CertificateTransparencyLoggingPreference: ENABLED
+      DomainName: !Ref KittensDomainName # Required
+      DomainValidationOptions:
+        - DomainName: !Ref KittensDomainName
+          HostedZoneId: !Ref DomainName
+      ValidationMethod: DNS
+
+  LogicalID:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+          Aliases: 
+          - !Ref KittensDomainName
+          Comment: Cloudfront Distribution pointing to Kittens S3 bucket
+          DefaultCacheBehavior: 
+              AllowedMethods: 
+                - GET
+                - HEAD
+              Compress: True
+              ForwardedValues: 
+                QueryString: true
+                Cookies: 
+                  - Forward: none
+              TargetOriginId: KittensOrigin
+              ViewerProtocolPolicy: allow-all
+            DefaultRootObject: index.html
+            Enabled: true
+            HttpVersion: http2
+            IPV6Enabled: true
+            Origins: 
+              - ConnectionAttempts: Integer
+                ConnectionTimeout: Integer
+                CustomOriginConfig: 
+                  CustomOriginConfig
+                DomainName: String
+                Id: String
+                OriginCustomHeaders: 
+                  - OriginCustomHeader
+                OriginPath: String
+                OriginShield: 
+                  OriginShield
+                S3OriginConfig: 
+                  S3OriginConfig
+
+            PriceClass: String
+            Restrictions: 
+              Restrictions
+            S3Origin: 
+              LegacyS3Origin
+            ViewerCertificate: 
+              ViewerCertificate
+            WebACLId: String
+
+
+Outputs:
