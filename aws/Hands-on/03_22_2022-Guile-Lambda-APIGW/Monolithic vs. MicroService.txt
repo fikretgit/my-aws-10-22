@@ -1,0 +1,3 @@
+
+
+https://articles.microservices.com/monolithic-vs-microservices-architecture-5c4848858f59#:~:text=A%20monolithic%20application%20is%20simply,deployed%2C%20scaled%2C%20and%20monitored.
