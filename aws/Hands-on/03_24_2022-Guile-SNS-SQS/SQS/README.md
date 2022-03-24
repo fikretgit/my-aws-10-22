@@ -93,7 +93,7 @@
 
 - Send a new message like "This message is sent from sqs to trigger lambda" to the `My-First-Queue`.
 
-- Show there is no message since it has been polled by lambda.
+- Show there is no message since it has been polled by lambda.(Lambda works and polled the messages, do what it has to do and then deleted the all mesaages, so we didn't see the messages at receive messages part of SQS Console because of the Lambda SQS-Poller Function..!!!!)
 
 ### Step 3 : Check Logs
 
