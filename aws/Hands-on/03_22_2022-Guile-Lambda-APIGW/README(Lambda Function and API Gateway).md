@@ -306,6 +306,7 @@ STEP 4 : Exposing Lambda via API Gateway
   - Confirm the dialog 'Add Permission to Lambda Function', Click 'OK'
 ```
 
+
 STEP 5: Testing Lambda via API Gateway
 
 - Click GET method under /city
