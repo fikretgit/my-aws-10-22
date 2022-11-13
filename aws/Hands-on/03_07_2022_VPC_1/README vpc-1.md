@@ -35,7 +35,7 @@ Note: After you  create VPC and all other components, show how you can do it eas
 
 - create a vpc named "clarus-vpc-a" with `10.7.0.0/16` CIDR
     - no ipv6 CIDR block
-    - tenancy(kiracılık): default
+    - tenancy: default
 
 - click create
 
@@ -86,7 +86,7 @@ STEP 4: Create Subnets
 - Push create subnet button
 
 1. 
-Name tag          :clarus-az1a-public-subnet (VPC seçince Name çıkıyor)
+Name tag          :clarus-az1a-public-subnet
 VPC               :clarus-vpc-a
 Availability Zone :us-east-1a
 IPv4 CIDR block   :10.7.1.0/24
@@ -185,7 +185,7 @@ clarus-default-rt (internet access is available even on private subnets)
       - Select 'clarus-igw'
       - save routes    
       
-STEP 6: enable Auto-Assign Public IPv4 Address for public subnets (Public Subnet ler için otomatik IPv4 Adres atamasını etkinleştirelim)
+STEP 6: enable Auto-Assign Public IPv4 Address for public subnets
 
 - Go to the Subnets from left hand menu
 

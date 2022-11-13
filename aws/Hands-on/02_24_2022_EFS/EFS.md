@@ -20,16 +20,15 @@
 - Click the `Create Security Group`.
 
 ```text
-Security Group Name  : EC2SecGrp
-Description          : EC2SecGrp
+Security Group Name  : EC2 SecGrp
+Description          : EC2 SecGrp
 VPC                  : Default VPC
 Inbound Rules:
     - Type: SSH ----> Source: Anywhere
-    Ayrıca NFS Protokolu de eklenebilir.. 2049 Port NO ya sahip
 Outbound Rules: Keep it as default
 Tag:
     - Key   : Name
-      Value : EC2SecGrp
+      Value : EC2 SecGrp
 ```
 
 ### Step 2 - Create EFS SecGrp:
@@ -37,8 +36,8 @@ Tag:
 - Click the `Create Security Group`.
 
 ```text
-Security Group Name  : EFSSecGrp
-Description          : EFSSecGrp
+Security Group Name  : EFS SecGrp
+Description          : EFS SecGrp
 VPC                  : Default VPC
 ***Inbound Rules:
     - Type: NFS ----> Port: 2049 ------>Source: sg-EC2 SecGrp
@@ -91,7 +90,7 @@ Virtual Private Cloud (VPC)     : Default VPC (Keep default)
 Availability and Durability     : Regional (Keep default)
 ```
 
-- To customize settings manually, select the "Customize" option seen at the bottom 
+- To customize settings manually, select the 'Customize' option seen at the bottom 
 
 ```text
 
@@ -152,9 +151,13 @@ ssh -i .....pem ec2-user@..................
 ```text
 sudo yum update -y
 ```
+- Change the hostname 
+
+```text
+sudo hostnamectl set-hostname First
 ```
-sudo hostnamectl set-hostname Felix  --> hostname i ayarladık..
-```
+
+- Exit and reconnect to the instance to see new hostname.
 
 - Install the "Amazon-efs-utils Package" on Amazon Linux
 
@@ -162,7 +165,7 @@ sudo hostnamectl set-hostname Felix  --> hostname i ayarladık..
 sudo yum install -y amazon-efs-utils
 ```
 
-- Create Mounting point --> bu aslında bir EFS giriş kapısı.. başka bir şey olmaz EFS olmalı ki girebilelim..!!
+- Create Mounting point 
 
 ```text
 sudo mkdir efs
@@ -210,6 +213,12 @@ ssh -i .....pem ec2-user@..................
 ```text
 sudo yum update -y
 ```
+- Change the hostname 
+
+```text
+sudo hostnamectl set-hostname Second
+```
+- Exit and reconnect to the instance to see new hostname.
 
 - Install the "Amazon-efs-utils Package" on Amazon Linux
 
@@ -279,20 +288,26 @@ Instance Type   : t2.micro
 Network         : default
 **File systems  :Add file system-------> FirstEFS (Note down the mnt point "/mnt/efs/fs1")
 Subnet          : default
-Security Group  : EC2SecGrp
-    Sec.Group Name : EC2SecGrp
+Security Group  : EC2 SecGrp
+    Sec.Group Name : EC2 SecGrp
 Tag             :
     Key         : Name
     Value       : EC2-3
 ```
 - Connect to EC2-3 with SSH
 
+- Change the hostname 
+
+```text
+sudo hostnamectl set-hostname Third
+```
+
 ```text
 ssh -i .....pem ec2-user@..................
 ```
 - Go to the directory of mount target 
-```text efs1 dosyasını sildik console da.. gerek yok dedi Osvaldo hocamız..
-cd /mnt/efs
+```text
+cd /mnt/efs/fs1/
 ```
 - Show the example.txt:
 

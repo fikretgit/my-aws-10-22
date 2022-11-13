@@ -34,7 +34,7 @@ At the end of the this hands-on training, students will be able to;
 Region: "N.Virginia"
 VPC: Default VPC
 Subnet: PublicA
-Sec Group: "Route 53 Sec-Group"
+Sec Group: "Route 53 Sec"
 
 user data: 
 
@@ -75,12 +75,11 @@ systemctl enable httpd
 
 ### STEP 3: Create Static WebSite Hosting :
 
- 1. Create Static WebSite Hosting-1/ "www.[your domain name].com"
+ 1. Create Static WebSite Hosting-1/ "www.[your domain name].net"
  
-  - Go to S3 service and create a bucket with sub-domain name: "www.[your sub-domain name].com"
+  - Go to S3 service and create a bucket with sub-domain name: "www.[your sub-domain name].net"
   - Public Access "Enabled"
   - Upload Files named "index.html" and "sorry.jpg" in "s3.bucket.www" folder
-  Properties >> Static WebSite Hosting >> Enabled >> İndex Document'e index.html yazıyoruz >> save changes..
   - Permissions>>> Bucket Policy >>> Paste bucket Policy
 ```bash
 {
@@ -212,7 +211,7 @@ Resources:
               <title> Congratulations! You have created an instance from Launch Template</title>
           </head>
           <body>
-              <h1>This web server is launched from launch template by Felix</h1>
+              <h1>This web server is launched from launch template by YOUR_NAME</h1>
               <p>This instance is created at <b>$DATE_TIME</b></p>
               <p>Private IP address of this instance is <b>$PRIVATE_IP</b></p>
               <p>Public IP address of this instance is <b>$PUBLIC_IP</b></p>
@@ -281,9 +280,9 @@ Explain that Public hosted Zone and permanent records SOA nad NS.
 ```bash
 Record Name:"www"
 Value/Route traffic to: 
-  - select "IP address or another value depending the record type" option (bu eski konsol özelliği büyük ihtimallle)
+  - select "IP address or another value depending the record type" option 
       - enter IP of the "N.Virginia_1" EC2
-Record Type : A -Routes traffic to an IPv4 address and some AWS resources
+Record Type : A
 Type: "A – IPv4 address"
 Alias:"No"
 TTL:"1m"
@@ -316,12 +315,12 @@ TTL:"1m"
 - Select newly created record's flag and hit the "create record" 
 tab seen bottom
 
-- After show "info.[your DNS name].com" on the browser, "Delete" this record 
+- After show "info.[your DNS name].net" on the browser, "Delete" this record 
 
 
 ### STEP 3: Add another IP (N. Virginia_2)  to the existing "A record" 
 
-- select "www.[your DNS name].com" A-record ---> Edit
+- select "www.[your DNS name].net" A-record ---> Edit
 ```bash
 Name:"www"
 Value/Route traffic to:
@@ -330,8 +329,7 @@ Value/Route traffic to:
 ```
 
 - Check from local terminal
-nslookup www.[your DNS name].com an show two IP address 
-2 adres gözükmeli..
+nslookup www.[your DNS name].net an show two IP address 
 
 
 ## Part 4 - Creating a CNAME Record:
@@ -350,7 +348,7 @@ nslookup www.[your DNS name].com an show two IP address
 Record Name:"showcname"
 Value/Route traffic to: 
   - "IP address or another value depending on the record type"
-    - enter "www.[your DNS name].com"
+    - enter "www.[your DNS name].net"
 Record Type : "CNAME"-Routes to another domain and some AWS resources
 TTL:"1m"
 ```
@@ -359,7 +357,7 @@ TTL:"1m"
 - Select newly created record's flag and hit the "create record" 
 tab seen bottom
 
-- After show "showcname.[your DNS name].com" on the browser. It will reflects the "www.[your DNS name].com". After that "Delete"  this record 
+- After show "showcname.[your DNS name].net" on the browser. It will reflects the "www.[your DNS name].net". After that "Delete"  this record 
 
 ## Part 5 - Creating a Alias Record:
 
@@ -378,7 +376,7 @@ Record Name:"www"
 Value/Route traffic to: 
     - Alias to *****S3 Website Endpoint*******
     - US East (N.Virginia) [us-east-1]
-    - choose your S3 bucket named "www.[your DNS name].com"
+    - choose your S3 bucket named "www.[your DNS name].net"
 Record Type : A
 ```
 - hit the define simple record
@@ -387,9 +385,9 @@ Record Type : A
 tab seen bottom
 
 
-- go to the target domain name "www.[your DNS name].com" on browser
+- go to the target domain name "www.[your DNS name].net" on browser
 
-- show the content of web page. It is the same as S3 static web hosting page.
+- show the content of web page. It is the same as  S3 static web hosting page.
 
 - ***Delete the Alias record 
 
@@ -408,7 +406,7 @@ Record Name:"www"
 Value/Route traffic to: 
     - Alias to ***** ELB Endpoint*******
     - US East (N.Virginia) [us-east-1]
-    - choose your S3 bucket named "www.[your DNS name].com"
+    - choose your S3 bucket named "www.[your DNS name].net"
 Record Type : A
 ```
 - hit the define simple record
@@ -417,7 +415,7 @@ Record Type : A
 tab seen bottom
 
 
-- go to the target domain name "www.[your DNS name].com" on browser
+- go to the target domain name "www.[your DNS name].net" on browser
 
 - show the content of web page. It is the same as S3 static web hosting page.
 
@@ -427,17 +425,3 @@ tab seen bottom
 - Delete bucket 
 - Delete A,CNAME and Alias record If they exist. 
 - Check the load balancer again
-
-
-1. delete hosted newly created records
-
-2. ilk oluşturulan intance ları silinsin
-
-3. Cloud Formation Slack'i siliyoruz
-diğer instancelar otomatik siliniyor..
-
-4. bucket içi empty yapıp silinebilir..
-
-
-
-

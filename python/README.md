@@ -12,7 +12,6 @@ Python Workshop contains hands-on trainings and projects.
 
 
 
-
 ## Naming Convention for Folders 
 
 - Use lower case letters to name the folders.
